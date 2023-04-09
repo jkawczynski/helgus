@@ -47,9 +47,9 @@ impl Default for TypingGame {
 }
 
 impl TypingGame {
-    pub fn start_game(&mut self, sentence: &str) -> Result<(), std::io::Error> {
+    pub fn start_game(&mut self, sentence: String) -> Result<(), std::io::Error> {
         self.terminal.clear_screen()?;
-        let mut words = get_sentence_words(sentence);
+        let mut words = get_sentence_words(&sentence);
         println!("{}", sentence);
 
         let now = Instant::now();

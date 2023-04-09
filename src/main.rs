@@ -1,11 +1,18 @@
 mod game;
 use game::TypingGame;
 
-fn main() {
-    //let sentence = "This is a new test, beat this game as fast as possible";
-    let sentence = "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.";
+mod words;
+use words::download_words;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let words = download_words().await?;
+
+    let sentence = words[0..60].join(" ");
 
     TypingGame::default()
         .start_game(sentence)
         .expect("Error starting the game");
+
+    Ok(())
 }
